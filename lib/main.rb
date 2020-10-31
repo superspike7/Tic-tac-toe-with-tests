@@ -1,15 +1,15 @@
-class Game
+class Board
   attr_accessor :board
 
     def initialize
-      @board = Array.new(9, '.') # 9 slot board
+      @@board = Array.new(9, '.') # 9 slot board
     end
 
   def player_move
     puts "your move, pick between 1 - 9:"
     move = gets.chomp.to_i 
-    if move <= 9 && move >= 1 && @board[move - 1] != "X" && @board[move - 1] != "O"
-    @board[move - 1] = 'O'
+    if move <= 9 && move >= 1 && @@board[move - 1] != "X" && @@board[move - 1] != "O"
+    @@board[move - 1] = 'O'
     else
       puts "You move, please pick an empty slot"
       player_move
@@ -18,8 +18,8 @@ class Game
 
   def ai_move
     random = Random.new.rand(8)
-    if @board[random] != "X" && @board[random] != "O"
-    @board[random] = "X"
+    if @@board[random] != "X" && @@board[random] != "O"
+    @@board[random] = "X"
     puts "ai choosed #{random + 1}"
     else 
       ai_move
@@ -30,13 +30,13 @@ class Game
     human_player = 'O'
     ai_player = 'X'
 
-    if pattern?(@board, human_player)
+    if pattern?(@@board, human_player)
       puts "You win! Congrats!"
       true
-    elsif pattern?(@board, ai_player)
+    elsif pattern?(@@board, ai_player)
       puts "ai wins!, better luck next time :D"
       true
-    elsif none_left?(@board)
+    elsif none_left?(@@board)
         puts "it's a tie!"
         true
     end
@@ -57,7 +57,7 @@ class Game
       self.show_board
   end
 
-  def show_board(board=@board)
+  def show_board(board=@@board)
     puts "|#{board[0]}|#{board[1]}|#{board[2]}|\n|#{board[3]}|#{board[4]}|#{board[5]}|\n|#{board[6]}|#{board[7]}|#{board[8]}|\n"
 
   end
