@@ -5,6 +5,10 @@ class Board
     @grid = Array.new(9, ".")
   end
 
+  def move(player, position) 
+    grid[position - 1] = player if valid_move?(position)
+  end
+
   def pattern?(player)
     valid_patterns = [@grid[0], @grid[1], @grid[2]],
                      [@grid[3], @grid[4], @grid[5]],
